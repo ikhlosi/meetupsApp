@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Card from "../shared/Card";
 import uuid from "react-native-uuid";
+import { globalStyles } from "../styles/global";
 
 const AllMeetups = () => {
   const [locations, setLocations] = useState([
@@ -26,9 +27,16 @@ const AllMeetups = () => {
       description: "I would go there if I was you.",
       favorite: false,
     },
+    {
+      id: uuid.v4(),
+      title: "Third Demo",
+      address: "Meetupstr 3, 1000 MeetupCity",
+      description: "I would go there if I was you.",
+      favorite: false,
+    },
   ]);
   return (
-    <View>
+    <View style={globalStyles.container}>
       <FlatList
         data={locations}
         renderItem={({ item }) => (
