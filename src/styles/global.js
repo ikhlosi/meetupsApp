@@ -6,4 +6,9 @@ export const globalStyles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     margin: 10,
   },
+  titleText: {
+    fontFamily: "cute-easter",
+    fontSize: 36,
+    color: "cornflowerblue",
+  },
 });
