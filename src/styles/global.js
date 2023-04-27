@@ -5,8 +5,6 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     paddingTop: StatusBar.currentHeight,
     margin: 10,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   titleText: {
     fontFamily: "cute-easter",

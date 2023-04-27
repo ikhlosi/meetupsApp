@@ -28,13 +28,6 @@ const MeetupForm = ({ addLocation }) => {
           touched,
         }) => (
           <View style={styles.formContainer}>
-            {/* <TextInput
-              placeholder="Title"
-              onChangeText={props.handleChange("title")}
-              value={props.values.title}
-              style={styles.input}
-            /> */}
-
             {Object.keys(values).map((value, i) => {
               return (
                 <View style={styles.inputContainer}>

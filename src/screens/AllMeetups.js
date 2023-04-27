@@ -1,11 +1,4 @@
-import {
-  Alert,
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
@@ -90,20 +83,20 @@ const AllMeetups = ({ navigation }) => {
         renderItem={({ item }) => (
           <Card>
             <Text>{item.title}</Text>
-            <Ionicons
-              name="information-circle"
-              size={24}
-              color="cornflowerblue"
-              onPress={() => goToDetails(item)}
-            />
-            {/* <Ionicons name="heart-outline" size={24} color="indianred" /> */}
-            <Ionicons
-              // name="heart-dislike-outline"
-              name={item.favorite ? "heart-outline" : "heart-dislike-outline"}
-              size={24}
-              color="indianred"
-              onPress={() => toggleFavorite(item.id)}
-            />
+            <View style={styles.iconsContainer}>
+              <Ionicons
+                name="information-circle"
+                size={24}
+                color="cornflowerblue"
+                onPress={() => goToDetails(item)}
+              />
+              <Ionicons
+                name={item.favorite ? "heart-outline" : "heart-dislike-outline"}
+                size={24}
+                color="indianred"
+                onPress={() => toggleFavorite(item.id)}
+              />
+            </View>
           </Card>
         )}
         keyExtractor={(item) => item.id}
@@ -138,5 +131,8 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 1,
+  },
+  iconsContainer: {
+    flexDirection: "row",
   },
 });

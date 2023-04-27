@@ -18,9 +18,6 @@ const MeetupDetails = ({ route }) => {
             <Text>{locationDetails[key]}</Text>
           </View>
         ))}
-        {/* <Text>{locationDetails.title}</Text>
-        <Text>{locationDetails.address}</Text>
-        <Text>{locationDetails.description}</Text> */}
       </Card>
     </View>
   );

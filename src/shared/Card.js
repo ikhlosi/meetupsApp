@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 
 const Card = (props) => {
@@ -28,7 +28,10 @@ const styles = StyleSheet.create({
     marginVertical: 6,
   },
   cardContent: {
+    flex: 1,
     marginHorizontal: 18,
     marginVertical: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
