@@ -13,6 +13,7 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
+    flex: 1,
     borderRadius: 6,
     elevation: 8,
     backgroundColor: "#fff",

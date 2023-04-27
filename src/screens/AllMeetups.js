@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   StyleSheet,
   Text,
@@ -7,9 +8,12 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import Card from "../shared/Card";
 import uuid from "react-native-uuid";
 import { globalStyles } from "../styles/global";
+import { Modal } from "react-native";
+import MeetupForm from "./MeetupForm";
 
 const AllMeetups = ({ navigation }) => {
   const [locations, setLocations] = useState([
@@ -27,14 +31,31 @@ const AllMeetups = ({ navigation }) => {
       description: "I would go there if I was you.",
       favorite: false,
     },
-    {
-      id: uuid.v4(),
-      title: "Third Demo",
-      address: "Meetupstr 3, 1000 MeetupCity",
-      description: "I would go there if I was you.",
-      favorite: false,
-    },
   ]);
+
+  const addLocation = (location) => {
+    setModalVisible(false);
+    if (locations.some((loc) => loc.address === location.address)) {
+      Alert.alert(
+        "Error",
+        `A meetup with this address already exists: ${location.address}`,
+        [
+          {
+            text: "Ok",
+          },
+        ]
+      );
+      return;
+    }
+
+    location.id = uuid.v4();
+    location.favorite = false;
+    setLocations((prev) => {
+      return [...prev, location];
+    });
+  };
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const goToDetails = (item) => {
     navigation.navigate("MeetupDetails", item);
@@ -52,6 +73,18 @@ const AllMeetups = ({ navigation }) => {
 
   return (
     <View style={globalStyles.container}>
+      <Modal visible={modalVisible}>
+        <View style={styles.modalContent}>
+          <Ionicons
+            name="close"
+            size={24}
+            color="black"
+            onPress={() => setModalVisible(false)}
+            style={[styles.modalToggle, styles.modalClose]}
+          />
+          <MeetupForm addLocation={addLocation} />
+        </View>
+      </Modal>
       <FlatList
         data={locations}
         renderItem={({ item }) => (
@@ -76,10 +109,34 @@ const AllMeetups = ({ navigation }) => {
         keyExtractor={(item) => item.id}
         numColumns={2}
       />
+      <View style={styles.modalToggle}>
+        <Entypo
+          name="add-to-list"
+          size={24}
+          color="black"
+          onPress={() => setModalVisible(true)}
+        />
+      </View>
     </View>
   );
 };
 
 export default AllMeetups;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  modalToggle: {
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "#333",
+    padding: 10,
+    borderRadius: 10,
+    alignSelf: "center",
+  },
+  modalClose: {
+    marginBottom: 0,
+    marginTop: 20,
+  },
+  modalContent: {
+    flex: 1,
+  },
+});
